@@ -6,6 +6,7 @@ const favicon = require("serve-favicon");
 const logger = require("winston");
 const path = require("path");
 const tesseract = require("tesseract.js");
+require('dotenv').config();
 
 const app = express();
 app.use(compression());
@@ -13,7 +14,7 @@ app.set("trust proxy", 1);
 app.use(favicon(__dirname + "/public/www/favicon.ico"));
 app.use(cors());
 
-const server = app.listen(4200, function () {
+const server = app.listen(process.env.PORT || 3000, function () {
   logger.info('Server started on port: '+ server.address().port);
 });
 
