@@ -14,13 +14,13 @@ app.set("trust proxy", 1);
 app.use(favicon(__dirname + "/public/www/favicon.ico"));
 app.use(cors());
 
-const server = app.listen(process.env.PORT || 3000, function () {
+const server = app.listen(process.env.PORT || 4200, function () {
   logger.info('Server started on port: '+ server.address().port);
 });
 
 app.get("/convert", (req, res) => {
   tesseract
-    .recognize("./para.jpg", "vie", { logger: (e) => console.log(e) })
+    .recognize("./para.jpg", "vie")
     .then((out) => res.status(200).send(out.data.text));
 });
 
