@@ -6,7 +6,7 @@ const favicon = require("serve-favicon");
 const logger = require("winston");
 const path = require("path");
 const tesseract = require("tesseract.js");
-require('dotenv').config();
+require("dotenv").config();
 
 const app = express();
 app.use(compression());
@@ -15,13 +15,17 @@ app.use(favicon(__dirname + "/public/www/favicon.ico"));
 app.use(cors());
 
 const server = app.listen(process.env.PORT || 4200, function () {
-  logger.info('Server started on port: '+ server.address().port);
+  logger.info("Server started on port: " + server.address().port);
 });
 
 app.get("/convert", (req, res) => {
   tesseract
     .recognize("./para.jpg", "vie")
     .then((out) => res.status(200).send(out.data.text));
+});
+
+app.get("/to", (req, res) => {
+  res.status(200).send("halo");
 });
 
 router.use(
